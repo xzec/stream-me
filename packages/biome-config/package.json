@@ -1,0 +1,9 @@
+{
+  "name": "@stream-me/biome-config",
+  "version": "1.0.0",
+  "files": ["biome.jsonc"],
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3"
+  }
+}
