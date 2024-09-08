@@ -1,0 +1,18 @@
+{
+  "name": "@stream-me/backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup-node src/index.ts --format esm --clean",
+    "run": "pnpm run build && node dist/index.mjs"
+  },
+  "dependencies": {
+    "fastify": "4.28.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/node": "20.16.5",
+    "tsup": "8.2.4"
+  }
+}
