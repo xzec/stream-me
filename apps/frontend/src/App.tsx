@@ -1,10 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Item from './components/Item'
 import type { FibonacciChunk } from './types'
 
 function App() {
   const [fibonacci, setFibonacci] = useState<FibonacciChunk[]>([])
+  const mounted = useRef(false)
 
-  useEffect(() => {
+  useEffect(function fetchFibonacci() {
+    if (!mounted.current) {
+      mounted.current = true
+      return
+    }
+
     fetch('http://localhost:3001/stream')
       .then((res) => {
         if (!(res.body instanceof ReadableStream)) throw Error('Response body is not a ReadableStream.')
@@ -14,8 +21,12 @@ function App() {
         const decoder = new TextDecoder()
         for await (const chunk of rs) {
           const decoded = decoder.decode(chunk)
-          const parsed = JSON.parse(decoded)
-          setFibonacci((prev) => [...prev, parsed])
+          try {
+            const parsed = JSON.parse(decoded)
+            setFibonacci((prev) => [...prev, parsed])
+          } catch (error) {
+            console.error('JSON.parse failed:', error)
+          }
         }
       })
   }, [])
@@ -25,7 +36,7 @@ function App() {
       <h1>Streamed Fibonacci sequence</h1>
       <section>
         {fibonacci.map(({ seq, data }) => (
-          <span key={seq}>{data}</span>
+          <Item key={seq}>{data}</Item>
         ))}
       </section>
     </main>
