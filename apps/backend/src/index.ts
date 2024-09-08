@@ -7,14 +7,14 @@ const fastify = Fastify({
 })
 
 fastify.get('/stream', (_request, reply) => {
-  const source = Readable.from(fibonacci(500))
+  const source = Readable.from(fibonacci(2000))
+  let seq = 0
   const format = new Transform({
     transform: (chunk, _encoding, callback) => {
-      let i = 0
       callback(
         null,
         JSON.stringify({
-          seq: ++i,
+          seq: ++seq,
           data: String(chunk),
           ts: new Date().toISOString(),
         }),
