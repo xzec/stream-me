@@ -18,11 +18,10 @@ function App() {
         return res.body
       })
       .then(async (rs) => {
-        const decoder = new TextDecoder()
-        for await (const chunk of rs) {
-          const decoded = decoder.decode(chunk)
+        const stream = rs.pipeThrough(new TextDecoderStream())
+        for await (const chunk of stream) {
           try {
-            const parsed = JSON.parse(decoded)
+            const parsed = JSON.parse(chunk)
             setFibonacci((prev) => [...prev, parsed])
           } catch (error) {
             console.error('JSON.parse failed:', error)
