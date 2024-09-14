@@ -1,8 +1,9 @@
 import { createReadStream } from 'node:fs'
-import { PassThrough, type Readable, Transform } from 'node:stream'
+import { PassThrough, type Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
-import { setTimeout } from 'node:timers/promises'
+import { setImmediate, setTimeout } from 'node:timers/promises'
 import Fastify from 'fastify'
+import { highlight, languages } from 'prismjs'
 
 const fastify = Fastify({
   logger: true,
@@ -13,29 +14,17 @@ fastify.get('/stream', (_request, reply) => {
   const lineByLine = async function* (source: Readable) {
     for await (const chunk of source) {
       const text = String(chunk)
-      for (const line of text.split('\n')) {
-        const res = `${line}\n`
-        yield res
-        if (res === '\n') {
+      for (const rawLine of text.split('\n')) {
+        const line = highlight(`${rawLine}\n`, languages.js, 'js')
+        yield line
+        if (line === '\n') {
+          await setImmediate()
           continue
         }
         await setTimeout(1000)
       }
     }
   }
-  let seq = 0
-  const format = new Transform({
-    transform: (chunk, _encoding, callback) => {
-      callback(
-        null,
-        JSON.stringify({
-          seq: ++seq,
-          data: String(chunk),
-          ts: new Date().toISOString(),
-        }),
-      )
-    },
-  })
   const pt = new PassThrough()
 
   pt.on('data', (chunk) => console.log('[DATA]', String(chunk)))

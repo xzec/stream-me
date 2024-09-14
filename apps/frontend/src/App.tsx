@@ -1,43 +1,49 @@
 import { useEffect, useRef, useState } from 'react'
-import Item from './components/Item'
-import type { FibonacciChunk } from './types'
+import Code from './components/Code'
 
 function App() {
-  const [fibonacci, setFibonacci] = useState<FibonacciChunk[]>([])
+  const [code, setCode] = useState<string[]>([])
   const mounted = useRef(false)
+  const codeRef = useRef<HTMLPreElement>(null)
 
-  useEffect(function fetchFibonacci() {
-    if (!mounted.current) {
+  useEffect(() => {
+    if (!mounted.current && import.meta.env.DEV) {
       mounted.current = true
       return
     }
 
-    fetch('http://localhost:3001/stream')
+    const controller = new AbortController()
+    fetch('http://localhost:3001/stream', { signal: controller.signal })
       .then((res) => {
         if (!(res.body instanceof ReadableStream)) throw Error('Response body is not a ReadableStream.')
         return res.body
       })
       .then(async (rs) => {
-        const stream = rs.pipeThrough(new TextDecoderStream())
-        for await (const chunk of stream) {
-          try {
-            const parsed = JSON.parse(chunk)
-            setFibonacci((prev) => [...prev, parsed])
-          } catch (error) {
-            console.error('JSON.parse failed:', error)
+        try {
+          const stream = rs.pipeThrough(new TextDecoderStream())
+          for await (const chunk of stream) {
+            setCode((prev) => [...prev, chunk])
           }
+        } catch (error) {
+          console.error(error)
         }
       })
+      .catch(console.error)
+
+    return () => {
+      controller.abort()
+      setCode([])
+    }
   }, [])
 
   return (
     <main>
-      <h1>Streamed Fibonacci sequence</h1>
-      <section>
-        {fibonacci.map(({ seq, data }) => (
-          <Item key={seq}>{data}</Item>
-        ))}
-      </section>
+      <h1>
+        Streamed implementation of the Node.js{' '}
+        <a href="https://github.com/nodejs/readable-stream/blob/main/lib/internal/streams/readable.js">Readable</a>.
+        Kick back and relax.
+      </h1>
+      <Code ref={codeRef} code={code} />
     </main>
   )
 }

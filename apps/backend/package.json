@@ -8,11 +8,13 @@
     "run": "pnpm run build && node dist/index.mjs"
   },
   "dependencies": {
-    "fastify": "4.28.1"
+    "fastify": "4.28.1",
+    "prismjs": "1.29.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/node": "20.16.5",
+    "@types/prismjs": "1.26.4",
     "tsup": "8.2.4"
   }
 }
