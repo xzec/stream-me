@@ -13,15 +13,35 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   width: 100%;
   min-height: 100vh;
+  overscroll-behavior: none;
+}
+
+button {
+  -webkit-appearance: none;
+  border-radius: 0;
+  text-align: inherit;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  color: inherit;
+  font: inherit;
 }
 
 main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 30px;
+  padding: 30px 30px 60px;
 }
 
 h1 {
@@ -29,23 +49,8 @@ h1 {
   font-size: xx-large;
 }
 
-pre {
-  border-radius: 4px;
-  background-color: #1e1e1e;
-  padding: 16px;
-  min-width: 800px;
-  width: fit-content;
-  margin: 0 auto;
-}
-
-span.line-number {
-  + div {
-    margin-left: 60px;
-  }
-  position: absolute;
-  display: inline-block;
-  text-align: left;
-  content: attr(data-content);
-  font-weight: bolder;
-  color: #808080;
+.indicator {
+  position: fixed;
+  right: 32px;
+  top: 32px;
 }

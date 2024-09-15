@@ -22,7 +22,6 @@ const useLineCodeStream = () => {
           const stream = rs.pipeThrough(new TextDecoderStream())
           for await (const chunk of stream) {
             setLinesOfCode((prev) => [...prev, chunk])
-            window.scrollTo(0, document.body.scrollHeight)
           }
         } catch (error) {
           console.error(error)

@@ -1,3 +1,4 @@
+import Autoscroll from '~/components/Autoscroll'
 import Code from '~/components/Code'
 import useLineCodeStream from '~/hooks/useLineCodeStream'
 
@@ -11,7 +12,8 @@ function App() {
         <a href="https://github.com/nodejs/readable-stream/blob/main/lib/internal/streams/readable.js">Readable</a>.
         Kick back and relax.
       </h1>
-      <Code ref={codeRef} code={code} />
+      <Code code={code} />
+      <Autoscroll code={code} />
     </main>
   )
 }

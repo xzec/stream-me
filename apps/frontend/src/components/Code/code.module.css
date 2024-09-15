@@ -1,0 +1,19 @@
+.code-block {
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    padding: 16px;
+    min-width: 800px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.line-number {
+    + div {
+        margin-left: 60px;
+    }
+    position: absolute;
+    display: inline-block;
+    text-align: left;
+    font-weight: bolder;
+    color: #808080;
+}

@@ -7,5 +7,10 @@ export default defineConfig({
     port: 3000,
     open: '/',
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
+  },
   plugins: [react(), tsconfigPaths()],
 })
