@@ -4,11 +4,11 @@ import useIntersectionObserver from '~/hooks/useIntersectionObserver'
 import useIsUserScrolling from '~/hooks/useIsUserScrolling'
 import classes from './autoscroll.module.css'
 
-type SentinelProps = {
+type AutoscrollProps = {
   code: string[]
 }
 
-const Autoscroll: FC<SentinelProps> = ({ code }) => {
+const Autoscroll: FC<AutoscrollProps> = ({ code }) => {
   const { ref, isVisible } = useIntersectionObserver()
   const isUserScrolling = useIsUserScrolling()
   const [scope, animate] = useAnimate()
@@ -16,14 +16,26 @@ const Autoscroll: FC<SentinelProps> = ({ code }) => {
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fire effect when linesOfCode change
   useEffect(() => {
     if (isVisible && !isUserScrolling) window.scrollTo(0, document.body.scrollHeight)
-    if (isVisible) animate(scope.current, { opacity: 0, y: 100 })
-    else animate(scope.current, { opacity: 1, y: 0 }, { animationDelay: {} })
   }, [isVisible, code])
+
+  useEffect(() => {
+    if (isVisible) animate(scope.current, { opacity: 0, y: 100 })
+    else animate(scope.current, { opacity: 1, y: 0 }, { delay: 0.1 })
+  }, [isVisible, animate, scope.current])
 
   return (
     <>
       <div ref={ref} />
-      <button ref={scope} className={classes.scrollDown} onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+      <button
+        ref={scope}
+        className={classes.scrollDownBtn}
+        onClick={() =>
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'instant',
+          })
+        }
+      >
         👇
       </button>
     </>
