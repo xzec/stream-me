@@ -8,6 +8,11 @@ type CodeProps = {
 
 const Code = forwardRef<HTMLPreElement, CodeProps>(({ code }, ref) => (
   <pre className={classes.codeBlock} ref={ref}>
+    <div className={classes.macos}>
+      <span className={`${classes.macosBtn} ${classes.red}`} />
+      <span className={`${classes.macosBtn} ${classes.yellow}`} />
+      <span className={`${classes.macosBtn} ${classes.green}`} />
+    </div>
     <code>
       {code.map((line, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: valid use of index keys

@@ -17,3 +17,24 @@
     font-weight: bolder;
     color: #808080;
 }
+
+.macos {
+    display: flex;
+    gap: 8px;
+    padding-bottom: 32px;
+}
+
+.macos-btn {
+    width: 13px;
+    height: 13px;
+    border-radius: 7px;
+    &.red {
+        background-color: #f65f58;
+    }
+    &.yellow {
+        background-color: #f9bc2e;
+    }
+    &.green {
+        background-color: #3cc83f;
+    }
+}
