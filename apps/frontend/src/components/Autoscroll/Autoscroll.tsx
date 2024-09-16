@@ -1,7 +1,7 @@
 import { useAnimate } from 'framer-motion'
 import { type FC, useEffect } from 'react'
 import useIntersectionObserver from '~/hooks/useIntersectionObserver'
-import useIsUserScrolling from '~/hooks/useIsUserScrolling'
+import useIsUserWheeling from '~/hooks/useIsUserWheeling'
 import classes from './autoscroll.module.css'
 
 type AutoscrollProps = {
@@ -10,12 +10,12 @@ type AutoscrollProps = {
 
 const Autoscroll: FC<AutoscrollProps> = ({ code }) => {
   const { ref, isVisible } = useIntersectionObserver()
-  const isUserScrolling = useIsUserScrolling()
+  const isUserWheeling = useIsUserWheeling()
   const [scope, animate] = useAnimate()
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fire effect when linesOfCode change
   useEffect(() => {
-    if (isVisible && !isUserScrolling) window.scrollTo(0, document.body.scrollHeight)
+    if (isVisible && !isUserWheeling) window.scrollTo(0, document.body.scrollHeight)
   }, [isVisible, code])
 
   useEffect(() => {

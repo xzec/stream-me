@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 
-const useIsUserScrolling = () => {
-  const [isScrolling, setIsScrolling] = useState(false)
+const DELAY_TIME_MS = 100
+
+const useIsUserWheeling = () => {
+  const [state, setState] = useState(false)
 
   useEffect(() => {
     let timeoutId: number
 
     const handler = () => {
-      setIsScrolling(true)
+      setState(true)
       clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => setIsScrolling(false), 100)
+      timeoutId = setTimeout(() => setState(false), DELAY_TIME_MS)
     }
 
     document.addEventListener('wheel', handler)
@@ -20,7 +22,7 @@ const useIsUserScrolling = () => {
     }
   }, [])
 
-  return isScrolling
+  return state
 }
 
-export default useIsUserScrolling
+export default useIsUserWheeling
