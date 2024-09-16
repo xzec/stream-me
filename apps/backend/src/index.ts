@@ -3,6 +3,7 @@ import { PassThrough, type Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { setImmediate, setTimeout } from 'node:timers/promises'
 import Fastify from 'fastify'
+import pico from 'picocolors'
 import Prism from 'prismjs'
 
 const fastify = Fastify({
@@ -27,8 +28,8 @@ fastify.get('/stream', (_request, reply) => {
   }
   const pt = new PassThrough()
 
-  pt.on('data', (chunk) => console.log('[DATA]', String(chunk)))
-  pt.on('error', (err) => console.error('[ERROR]', err))
+  pt.on('data', (chunk) => console.log(pico.magenta('DATA'), String(chunk)))
+  pt.on('error', (err) => console.error(pico.red('ERROR'), err))
   void pipeline(source, lineByLine, pt).catch(console.error)
 
   reply.header('Access-Control-Allow-Origin', '*')
