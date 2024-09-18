@@ -1,10 +1,12 @@
 {
   "name": "@stream-me/backend",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "packageManager": "pnpm@9.1.2",
+  "main": "dist/index.mjs",
   "scripts": {
     "build": "tsup-node src/index.ts --format esm --clean",
+    "start": "node dist/index.mjs",
     "run": "pnpm run build && node dist/index.mjs"
   },
   "dependencies": {
@@ -17,5 +19,8 @@
     "@types/node": "20.16.5",
     "@types/prismjs": "1.26.4",
     "tsup": "8.2.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.21.3"
   }
 }

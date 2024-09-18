@@ -6,6 +6,8 @@ settings:
 
 importers:
 
+  .: {}
+
   apps/backend:
     dependencies:
       fastify:
@@ -17,6 +19,10 @@ importers:
       prismjs:
         specifier: 1.29.0
         version: 1.29.0
+    optionalDependencies:
+      '@rollup/rollup-linux-x64-gnu':
+        specifier: 4.21.3
+        version: 4.21.3
     devDependencies:
       '@biomejs/biome':
         specifier: 1.8.3
@@ -42,9 +48,13 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      vite-tsconfig-paths:
-        specifier: 5.0.1
-        version: 5.0.1(typescript@5.5.4)(vite@5.4.3(@types/node@20.16.5))
+      vite:
+        specifier: 5.4.3
+        version: 5.4.3(@types/node@20.16.5)
+    optionalDependencies:
+      '@rollup/rollup-linux-x64-gnu':
+        specifier: 4.21.3
+        version: 4.21.3
     devDependencies:
       '@types/react':
         specifier: 18.3.5
@@ -61,9 +71,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
-      vite:
-        specifier: 5.4.3
-        version: 5.4.3(@types/node@20.16.5)
+      vite-tsconfig-paths:
+        specifier: 5.0.1
+        version: 5.0.1(typescript@5.5.4)(vite@5.4.3(@types/node@20.16.5))
 
   packages/biome-config:
     devDependencies:
@@ -606,6 +616,11 @@ packages:
 
   '@rollup/rollup-linux-x64-gnu@4.21.2':
     resolution: {integrity: sha512-B90tYAUoLhU22olrafY3JQCFLnT3NglazdwkHyxNDYF/zAxJt5fJUB/yBoWFoIQ7SQj+KLe3iL4BhOMa9fzgpw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rollup/rollup-linux-x64-gnu@4.21.3':
+    resolution: {integrity: sha512-kZPbX/NOPh0vhS5sI+dR8L1bU2cSO9FgxwM8r7wHzGydzfSjLRCFAT87GR5U9scj2rhzN3JPYVC7NoBbl4FZ0g==}
     cpu: [x64]
     os: [linux]
 
@@ -1891,6 +1906,9 @@ snapshots:
     optional: true
 
   '@rollup/rollup-linux-x64-gnu@4.21.2':
+    optional: true
+
+  '@rollup/rollup-linux-x64-gnu@4.21.3':
     optional: true
 
   '@rollup/rollup-linux-x64-musl@4.21.2':

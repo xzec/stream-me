@@ -38,7 +38,7 @@ fastify.get('/stream', (_request, reply) => {
 })
 
 try {
-  await fastify.listen({ port: 3001 })
+  await fastify.listen({ port: 3001, host: '0.0.0.0' })
 } catch (err) {
   fastify.log.error(err)
   process.exit(1)
