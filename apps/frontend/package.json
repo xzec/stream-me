@@ -7,14 +7,12 @@
   "files": ["dist/*"],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "start": "vite preview --host --port 3000"
+    "build": "tsc -b && vite build"
   },
   "dependencies": {
     "framer-motion": "11.5.4",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "vite": "5.4.3"
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@types/react": "18.3.5",
@@ -22,6 +20,7 @@
     "@vitejs/plugin-react": "4.3.1",
     "globals": "15.9.0",
     "typescript": "5.5.4",
+    "vite": "5.4.3",
     "vite-tsconfig-paths": "5.0.1"
   },
   "optionalDependencies": {
