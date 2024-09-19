@@ -8,7 +8,7 @@ function App() {
   return (
     <main>
       <h1>
-        Streamed implementation of the Node.js{' '}
+        A Line-by-line streamed implementation of the Node.js{' '}
         <a
           href="https://github.com/nodejs/readable-stream/blob/main/lib/internal/streams/readable.js"
           target="_blank"
