@@ -19,9 +19,6 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run --filter=${APP_NAME} build
 RUN pnpm deploy --filter=${APP_NAME} --prod=/prod/app
 
-FROM base AS final
+FROM caddy:latest
 
-COPY --from=build /prod/app /app
-
-EXPOSE 3000
-CMD ["pnpm", "start"]
+COPY --from=build /prod/app/dist /srv

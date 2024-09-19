@@ -18,6 +18,16 @@ services:
       platforms:
         - "linux/arm64/v8"
     ports:
-      - '3000:3000'
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./apps/frontend/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - backend
+
+volumes:
+  caddy_data:
+  caddy_config:
