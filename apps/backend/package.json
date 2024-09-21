@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsup-node src/index.ts --format esm --clean",
     "start": "node dist/index.mjs",
-    "run": "pnpm run build && node dist/index.mjs"
+    "run": "pnpm run build && pnpm run start"
   },
   "dependencies": {
     "fastify": "4.28.1",
