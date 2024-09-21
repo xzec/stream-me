@@ -8,16 +8,15 @@ function App() {
   return (
     <main>
       <h1>
-        A Line-by-line streamed implementation of the Node.js{' '}
+        Streamed implementation of the Node.js{' '}
         <a
-          href="https://github.com/nodejs/readable-stream/blob/main/lib/internal/streams/readable.js"
+          href="https://github.com/nodejs/readable-stream/blob/v4.5.2/lib/internal/streams/readable.js"
           target="_blank"
           rel="noopener noreferrer"
         >
           Readable
         </a>
-        .<br />
-        Kick back and relax.
+        . Kick back and relax 😏
       </h1>
       <Code code={code} />
       <Autoscroll code={code} />
